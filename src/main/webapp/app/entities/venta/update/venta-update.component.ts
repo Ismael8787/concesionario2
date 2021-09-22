@@ -12,7 +12,7 @@ import { CompradorService } from 'app/entities/comprador/service/comprador.servi
 import { IVendedor } from 'app/entities/vendedor/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/service/vendedor.service';
 import { ICoche } from 'app/entities/coche/coche.model';
-
+import { CocheService } from 'app/entities/coche/service/coche.service';
 @Component({
   selector: 'jhi-venta-update',
   templateUrl: './venta-update.component.html',
@@ -31,12 +31,14 @@ export class VentaUpdateComponent implements OnInit {
     comprador: [null, Validators.required],
     vendedor: [null, Validators.required],
     numFactura: [null, Validators.required],
+    coche: [null, Validators.required],
   });
 
   constructor(
     protected ventaService: VentaService,
     protected compradorService: CompradorService,
     protected vendedorService: VendedorService,
+    protected cocheService: CocheService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -127,6 +129,12 @@ export class VentaUpdateComponent implements OnInit {
         )
       )
       .subscribe((vendedors: IVendedor[]) => (this.vendedorsSharedCollection = vendedors));
+
+    this.cocheService
+      .queryD()
+      .pipe(map((res: HttpResponse<ICoche[]>) => res.body ?? []))
+      .pipe(map((coches: ICoche[]) => this.cocheService.addCocheToCollectionIfMissing(coches, this.editForm.get('coche')!.value)))
+      .subscribe((coches: ICoche[]) => (this.cochesSharedCollection = coches));
   }
 
   protected createFromForm(): IVenta {

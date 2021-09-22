@@ -36,7 +36,7 @@ export class CocheComponent implements OnInit {
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.cocheService
-      .queryD({
+      .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
