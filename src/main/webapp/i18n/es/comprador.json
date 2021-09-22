@@ -1,0 +1,29 @@
+{
+  "concesionario2App": {
+    "comprador": {
+      "home": {
+        "title": "Compradors",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Comprador",
+        "createOrEditLabel": "Crear o editar Comprador",
+        "notFound": "Ningún Compradors encontrado"
+      },
+      "created": "Un nuevo Comprador ha sido creado con el identificador {{ param }}",
+      "updated": "Un Comprador ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Comprador ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Comprador {{ id }}?"
+      },
+      "detail": {
+        "title": "Comprador"
+      },
+      "id": "ID",
+      "dni": "Dni",
+      "nombre": "Nombre",
+      "apellido1": "Apellido 1",
+      "apellido2": "Apellido 2",
+      "fechaNacimiento": "Fecha Nacimiento",
+      "direccion": "Direccion"
+    }
+  }
+}

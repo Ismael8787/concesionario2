@@ -1,0 +1,35 @@
+{
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "precioTotal",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "comprador",
+      "otherEntityName": "comprador",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipName": "vendedor",
+      "otherEntityName": "vendedor",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "no",
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Venta",
+  "changelogDate": "20210922085911"
+}
