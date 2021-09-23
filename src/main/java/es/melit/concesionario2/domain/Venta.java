@@ -40,6 +40,9 @@ public class Venta implements Serializable {
     @Column(name = "num_factura")
     private String numFactura;
 
+    @Column(name = "coche_id")
+    private Long cocheId;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -116,6 +119,14 @@ public class Venta implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+    public Long getCocheId() {
+        return cocheId;
+    }
+
+    public void setCocheId(Long cocheId) {
+        this.cocheId = cocheId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -140,6 +151,8 @@ public class Venta implements Serializable {
             "id=" + getId() +
             ", fecha='" + getFecha() + "'" +
             ", precioTotal=" + getPrecioTotal() +
+            ", precioTotal=" + getNumFactura() +
+            ", precioTotal=" + getCocheId() +
             "}";
     }
 }

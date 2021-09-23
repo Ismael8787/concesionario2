@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 import { IComprador } from 'app/entities/comprador/comprador.model';
 import { IVendedor } from 'app/entities/vendedor/vendedor.model';
-
+import { Coche } from '../coche/coche.model';
 export interface IVenta {
   id?: number;
   fecha?: dayjs.Dayjs;
@@ -9,6 +9,7 @@ export interface IVenta {
   comprador?: IComprador;
   vendedor?: IVendedor;
   numFactura?: string;
+  cocheId?: number;
 }
 
 export class Venta implements IVenta {
@@ -18,7 +19,8 @@ export class Venta implements IVenta {
     public precioTotal?: number,
     public comprador?: IComprador,
     public vendedor?: IVendedor,
-    public numFactura?: string
+    public numFactura?: string,
+    public cocheId?: number
   ) {}
 }
 

@@ -23,7 +23,7 @@ export class VentaUpdateComponent implements OnInit {
   compradorsSharedCollection: IComprador[] = [];
   vendedorsSharedCollection: IVendedor[] = [];
   cochesSharedCollection: ICoche[] = [];
-
+  aux: number | undefined;
   editForm = this.fb.group({
     id: [],
     fecha: [null, [Validators.required]],
@@ -62,6 +62,8 @@ export class VentaUpdateComponent implements OnInit {
       this.subscribeToSaveResponse(this.ventaService.update(venta));
     } else {
       this.subscribeToSaveResponse(this.ventaService.create(venta));
+      // this.aux=venta.cocheId;
+      // this.cochesSharedCollection[this.aux]
     }
   }
 
@@ -100,6 +102,7 @@ export class VentaUpdateComponent implements OnInit {
       comprador: venta.comprador,
       vendedor: venta.vendedor,
       numFactura: venta.numFactura,
+      cocheId: venta.cocheId,
     });
 
     this.compradorsSharedCollection = this.compradorService.addCompradorToCollectionIfMissing(
@@ -146,6 +149,7 @@ export class VentaUpdateComponent implements OnInit {
       comprador: this.editForm.get(['comprador'])!.value,
       vendedor: this.editForm.get(['vendedor'])!.value,
       numFactura: this.editForm.get(['numFactura'])!.value,
+      cocheId: this.editForm.get(['coche'])!.value.id,
     };
   }
 }
