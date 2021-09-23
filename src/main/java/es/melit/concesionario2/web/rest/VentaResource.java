@@ -1,6 +1,9 @@
 package es.melit.concesionario2.web.rest;
 
+import es.melit.concesionario2.domain.Coche;
+import es.melit.concesionario2.domain.Coche_;
 import es.melit.concesionario2.domain.Venta;
+import es.melit.concesionario2.repository.CocheRepository;
 import es.melit.concesionario2.repository.VentaRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -41,9 +44,13 @@ public class VentaResource {
     private String applicationName;
 
     private final VentaRepository ventaRepository;
+    private final CocheResource cocheResource;
+    private final CocheRepository cocheRepository;
 
-    public VentaResource(VentaRepository ventaRepository) {
+    public VentaResource(VentaRepository ventaRepository, CocheResource cocheResource, CocheRepository cocheRepository) {
         this.ventaRepository = ventaRepository;
+        this.cocheResource = cocheResource;
+        this.cocheRepository = cocheRepository;
     }
 
     /**
@@ -60,6 +67,8 @@ public class VentaResource {
             throw new BadRequestAlertException("A new venta cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Venta result = ventaRepository.save(venta);
+        this.cocheResource.cambiarValor(this.cocheRepository.findById(venta.getCocheId()));
+
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

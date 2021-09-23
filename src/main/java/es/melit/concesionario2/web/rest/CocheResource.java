@@ -204,4 +204,17 @@ public class CocheResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    // public Coche dameCoche( Long id){
+    //     Coche coche = this.getCoche(id)
+    //     return coche;
+    //     }
+
+    public void cambiarValor(Optional<Coche> coche) {
+        if (!coche.isPresent()) {} else {
+            Coche c = coche.get();
+            c.setVendido(true);
+            this.cocheRepository.save(c);
+        }
+    }
 }

@@ -62,8 +62,6 @@ export class VentaUpdateComponent implements OnInit {
       this.subscribeToSaveResponse(this.ventaService.update(venta));
     } else {
       this.subscribeToSaveResponse(this.ventaService.create(venta));
-      // this.aux=venta.cocheId;
-      // this.cochesSharedCollection[this.aux]
     }
   }
 
