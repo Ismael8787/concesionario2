@@ -67,7 +67,7 @@ public class VentaResource {
             throw new BadRequestAlertException("A new venta cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Venta result = ventaRepository.save(venta);
-        this.cocheResource.cambiarValor(this.cocheRepository.findById(venta.getCocheId()));
+        this.cocheResource.cambiarValor(this.cocheRepository.findById(venta.getCocheId()), venta);
 
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))

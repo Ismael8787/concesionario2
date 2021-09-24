@@ -1,6 +1,7 @@
 package es.melit.concesionario2.web.rest;
 
 import es.melit.concesionario2.domain.Coche;
+import es.melit.concesionario2.domain.Venta;
 import es.melit.concesionario2.repository.CocheRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -210,10 +211,11 @@ public class CocheResource {
     //     return coche;
     //     }
 
-    public void cambiarValor(Optional<Coche> coche) {
+    public void cambiarValor(Optional<Coche> coche, Venta venta) {
         if (!coche.isPresent()) {} else {
             Coche c = coche.get();
             c.setVendido(true);
+            c.setVenta(venta);
             this.cocheRepository.save(c);
         }
     }

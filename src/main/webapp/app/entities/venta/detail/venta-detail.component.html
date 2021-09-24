@@ -32,6 +32,12 @@
             <a [routerLink]="['/comprador', venta.comprador?.id, 'view']">{{ venta.comprador?.id }}</a>
           </div>
         </dd>
+        <dt><span jhiTranslate="concesionario2App.coche.id">Coche</span></dt>
+        <dd>
+          <div *ngIf="venta.cocheId">
+            <a [routerLink]="['/coche', venta.cocheId, 'view']">{{ venta.cocheId }}</a>
+          </div>
+        </dd>
         <dt><span jhiTranslate="concesionario2App.venta.vendedor">Vendedor</span></dt>
         <dd>
           <div *ngIf="venta.vendedor">
