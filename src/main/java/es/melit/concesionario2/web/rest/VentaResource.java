@@ -110,6 +110,8 @@ public class VentaResource {
         }
 
         Venta result = ventaRepository.save(venta);
+        this.cocheResource.actualizarValorAntes(id, venta);
+
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, venta.getId().toString()))
@@ -202,7 +204,9 @@ public class VentaResource {
     @DeleteMapping("/ventas/{id}")
     public ResponseEntity<Void> deleteVenta(@PathVariable Long id) {
         log.debug("REST request to delete Venta : {}", id);
+        this.cocheResource.eliminarValor(id);
         ventaRepository.deleteById(id);
+
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

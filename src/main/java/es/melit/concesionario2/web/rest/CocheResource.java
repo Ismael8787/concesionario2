@@ -1,8 +1,11 @@
 package es.melit.concesionario2.web.rest;
 
 import es.melit.concesionario2.domain.Coche;
+import es.melit.concesionario2.domain.Comprador;
 import es.melit.concesionario2.domain.Venta;
 import es.melit.concesionario2.repository.CocheRepository;
+import es.melit.concesionario2.repository.CompradorRepository;
+import es.melit.concesionario2.repository.VentaRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -42,9 +45,13 @@ public class CocheResource {
     private String applicationName;
 
     private final CocheRepository cocheRepository;
+    private final VentaRepository ventaRepository;
+    private final CompradorRepository compradorRepository;
 
-    public CocheResource(CocheRepository cocheRepository) {
+    public CocheResource(CocheRepository cocheRepository, VentaRepository ventaRepository, CompradorRepository compradorRepository) {
         this.cocheRepository = cocheRepository;
+        this.ventaRepository = ventaRepository;
+        this.compradorRepository = compradorRepository;
     }
 
     /**
@@ -218,6 +225,83 @@ public class CocheResource {
             c.setVenta(venta);
             //venta.setComprador(comprador);
             this.cocheRepository.save(c);
+        }
+    }
+
+    // public void actualizarValorAntes(Long id,Venta venta){
+
+    //     Optional<Coche> c= this.cocheRepository.findById(venta.getCocheId());
+    //     Comprador comprador=venta.getComprador();
+
+    //        if (!c.isPresent()) {} else {
+    //            Coche coche = c.get();
+    //            coche.setVendido(false);
+    //            coche.setVenta(null);
+
+    //             comprador.setCocheComprado(null);
+    //            //venta.setComprador(comprador);
+    //            this.compradorRepository.save(comprador);
+    //            this.cocheRepository.save(coche);
+    //        }
+    //    }
+
+    public void actualizarValorAntes(Long id, Venta venta) {
+        Optional<Venta> v = this.ventaRepository.findById(id);
+
+        Venta v2 = v.get();
+        Comprador comprador = v2.getComprador();
+
+        if (v2.getCocheId() != venta.getCocheId()) {
+            Optional<Coche> c = this.cocheRepository.findById(v2.getCocheId());
+            Coche coche = c.get();
+            coche.setVendido(false);
+            coche.setVenta(null);
+            comprador.setCocheComprado(null);
+            this.compradorRepository.save(comprador);
+            this.cocheRepository.save(coche);
+        } else {
+            Optional<Coche> c = this.cocheRepository.findById(v2.getCocheId());
+            Coche coche = c.get();
+            coche.setVendido(true);
+            coche.setVenta(venta);
+
+            comprador.setCocheComprado(coche.getId());
+            //venta.setComprador(comprador);
+            this.compradorRepository.save(comprador);
+            this.cocheRepository.save(coche);
+        }
+    }
+
+    // public void actualizarValorDespues(Optional<Coche> coche, Venta venta){
+
+    //  Comprador comprador=venta.getComprador();
+
+    //     if (!coche.isPresent()) {} else {
+    //         Coche c = coche.get();
+    //          c.setVendido(true);
+    //          c.setVenta(venta);
+
+    //          comprador.setCocheComprado(c.getId());
+    //         //venta.setComprador(comprador);
+    //         this.compradorRepository.save(comprador);
+    //         this.cocheRepository.save(c);
+    //     }
+    // }
+
+    public void eliminarValor(Long id) {
+        Optional<Venta> v = this.ventaRepository.findById(id);
+        if (!v.isPresent()) {} else {
+            Venta venta = v.get();
+            Comprador comprador = venta.getComprador();
+            comprador.setCocheComprado(null);
+            this.compradorRepository.save(comprador);
+            Optional<Coche> c = this.cocheRepository.findById(venta.getCocheId());
+            if (!c.isPresent()) {} else {
+                Coche coche = c.get();
+                coche.setVenta(null);
+                coche.setVendido(false);
+                this.cocheRepository.save(coche);
+            }
         }
     }
 }
