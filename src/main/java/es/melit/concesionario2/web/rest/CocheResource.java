@@ -216,6 +216,7 @@ public class CocheResource {
             Coche c = coche.get();
             c.setVendido(true);
             c.setVenta(venta);
+            //venta.setComprador(comprador);
             this.cocheRepository.save(c);
         }
     }

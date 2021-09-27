@@ -8,6 +8,7 @@ export interface IComprador {
   apellido2?: string | null;
   fechaNacimiento?: dayjs.Dayjs;
   direccion?: string;
+  cocheComprado?: number;
 }
 
 export class Comprador implements IComprador {
@@ -18,7 +19,8 @@ export class Comprador implements IComprador {
     public apellido1?: string,
     public apellido2?: string | null,
     public fechaNacimiento?: dayjs.Dayjs,
-    public direccion?: string
+    public direccion?: string,
+    public cocheComprado?: number
   ) {}
 }
 

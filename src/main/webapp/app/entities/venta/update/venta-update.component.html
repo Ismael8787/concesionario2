@@ -89,7 +89,7 @@
 
         <div class="form-group">
           <label class="form-control-label" for="field_coche">Coche</label>
-          <select multiple size="3" class="form-control" id="field_coche" data-cy="coche" name="coche" formControlName="coche">
+          <select class="form-control" id="field_coche" data-cy="coche" name="coche" formControlName="coche">
             <option *ngIf="!editForm.get('coche')!.value" [ngValue]="null"></option>
             <option
               [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"

@@ -23,7 +23,8 @@
       "apellido1": "Apellido 1",
       "apellido2": "Apellido 2",
       "fechaNacimiento": "Fecha Nacimiento",
-      "direccion": "Direccion"
+      "direccion": "Direccion",
+      "cocheComprado": "coche_comprado"
     }
   }
 }

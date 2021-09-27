@@ -1,6 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="CompradorHeading">
-    <span jhiTranslate="concesionario2App.comprador.home.title">Compradors</span>
+    <span jhiTranslate="concesionario2App.comprador.home.title">Compradores</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
@@ -51,6 +51,9 @@
           <th scope="col" jhiSortBy="direccion">
             <span jhiTranslate="concesionario2App.comprador.direccion">Direccion</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="cocheComprado">
+            <span jhiTranslate="concesionario2App.comprador.cocheComprado">Coche Comprado</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -65,6 +68,7 @@
           <td>{{ comprador.apellido2 }}</td>
           <td>{{ comprador.fechaNacimiento | formatMediumDate }}</td>
           <td>{{ comprador.direccion }}</td>
+          <td>{{ comprador.cocheComprado }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button
