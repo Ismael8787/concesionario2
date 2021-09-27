@@ -87,7 +87,7 @@ export class CompradorUpdateComponent implements OnInit {
       apellido1: this.editForm.get(['apellido1'])!.value,
       apellido2: this.editForm.get(['apellido2'])!.value,
       fechaNacimiento: this.editForm.get(['fechaNacimiento'])!.value,
-      direccion: this.editForm.get(['direccion'])!.value,
+      direccion: this.editForm.get(['direccion'])!.value, //chao
     };
   }
 }
