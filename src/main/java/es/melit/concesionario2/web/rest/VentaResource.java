@@ -4,6 +4,7 @@ import es.melit.concesionario2.domain.Coche;
 import es.melit.concesionario2.domain.Coche_;
 import es.melit.concesionario2.domain.Venta;
 import es.melit.concesionario2.repository.CocheRepository;
+import es.melit.concesionario2.repository.CompradorRepository;
 import es.melit.concesionario2.repository.VentaRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -46,11 +47,18 @@ public class VentaResource {
     private final VentaRepository ventaRepository;
     private final CocheResource cocheResource;
     private final CocheRepository cocheRepository;
+    private final CompradorResource compradorResource;
 
-    public VentaResource(VentaRepository ventaRepository, CocheResource cocheResource, CocheRepository cocheRepository) {
+    public VentaResource(
+        VentaRepository ventaRepository,
+        CocheResource cocheResource,
+        CocheRepository cocheRepository,
+        CompradorResource compradorResource
+    ) {
         this.ventaRepository = ventaRepository;
         this.cocheResource = cocheResource;
         this.cocheRepository = cocheRepository;
+        this.compradorResource = compradorResource;
     }
 
     /**
@@ -68,6 +76,7 @@ public class VentaResource {
         }
         Venta result = ventaRepository.save(venta);
         this.cocheResource.cambiarValor(this.cocheRepository.findById(venta.getCocheId()), venta);
+        this.compradorResource.asignarValor(venta);
 
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))

@@ -1,6 +1,8 @@
 package es.melit.concesionario2.web.rest;
 
+import es.melit.concesionario2.domain.Coche;
 import es.melit.concesionario2.domain.Comprador;
+import es.melit.concesionario2.domain.Venta;
 import es.melit.concesionario2.repository.CompradorRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -203,5 +205,14 @@ public class CompradorResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    public void asignarValor(Venta venta) {
+        // if (!coche.isPresent()) {} else {
+        Comprador c = venta.getComprador();
+        c.setCocheComprado(venta.getCocheId());
+
+        this.compradorRepository.save(c);
+        // }
     }
 }
