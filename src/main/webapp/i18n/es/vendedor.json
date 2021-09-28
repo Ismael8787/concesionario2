@@ -24,7 +24,8 @@
       "fechaNacimiento": "Fecha Nacimiento",
       "fechaContratacion": "Fecha Contratacion",
       "fechaBaja": "Fecha Baja",
-      "dni": "Dni"
+      "dni": "Dni",
+      "comision": "comision"
     }
   }
 }

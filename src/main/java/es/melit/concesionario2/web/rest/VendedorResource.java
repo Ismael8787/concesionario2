@@ -1,6 +1,9 @@
 package es.melit.concesionario2.web.rest;
 
+import es.melit.concesionario2.domain.Coche;
 import es.melit.concesionario2.domain.Vendedor;
+import es.melit.concesionario2.domain.Venta;
+import es.melit.concesionario2.repository.CocheRepository;
 import es.melit.concesionario2.repository.VendedorRepository;
 import es.melit.concesionario2.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -42,8 +45,11 @@ public class VendedorResource {
 
     private final VendedorRepository vendedorRepository;
 
-    public VendedorResource(VendedorRepository vendedorRepository) {
+    private final CocheRepository cocheRepository;
+
+    public VendedorResource(VendedorRepository vendedorRepository, CocheRepository cocheRepository) {
         this.vendedorRepository = vendedorRepository;
+        this.cocheRepository = cocheRepository;
     }
 
     /**
@@ -206,5 +212,13 @@ public class VendedorResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    public void darComision(Venta venta) {
+        Optional<Coche> c = this.cocheRepository.findById(venta.getCocheId());
+        Coche coche = c.get();
+        Vendedor v = venta.getVendedor();
+        v.setComision(0.05 * coche.getPrecio() + v.getComision());
+        this.vendedorRepository.save(v);
     }
 }

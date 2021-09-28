@@ -228,23 +228,6 @@ public class CocheResource {
         }
     }
 
-    // public void actualizarValorAntes(Long id,Venta venta){
-
-    //     Optional<Coche> c= this.cocheRepository.findById(venta.getCocheId());
-    //     Comprador comprador=venta.getComprador();
-
-    //        if (!c.isPresent()) {} else {
-    //            Coche coche = c.get();
-    //            coche.setVendido(false);
-    //            coche.setVenta(null);
-
-    //             comprador.setCocheComprado(null);
-    //            //venta.setComprador(comprador);
-    //            this.compradorRepository.save(comprador);
-    //            this.cocheRepository.save(coche);
-    //        }
-    //    }
-
     public void actualizarValorAntes(Venta venta) {
         Comprador comprador = venta.getComprador();
         Optional<Coche> c = this.cocheRepository.findById(venta.getCocheId());

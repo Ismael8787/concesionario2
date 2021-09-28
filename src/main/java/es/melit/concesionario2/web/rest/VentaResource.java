@@ -48,17 +48,20 @@ public class VentaResource {
     private final CocheResource cocheResource;
     private final CocheRepository cocheRepository;
     private final CompradorResource compradorResource;
+    private final VendedorResource vendedorResource;
 
     public VentaResource(
         VentaRepository ventaRepository,
         CocheResource cocheResource,
         CocheRepository cocheRepository,
-        CompradorResource compradorResource
+        CompradorResource compradorResource,
+        VendedorResource vendedorResource
     ) {
         this.ventaRepository = ventaRepository;
         this.cocheResource = cocheResource;
         this.cocheRepository = cocheRepository;
         this.compradorResource = compradorResource;
+        this.vendedorResource = vendedorResource;
     }
 
     /**
@@ -77,7 +80,7 @@ public class VentaResource {
         Venta result = ventaRepository.save(venta);
         this.cocheResource.cambiarValor(this.cocheRepository.findById(venta.getCocheId()), venta);
         this.compradorResource.asignarValor(venta);
-
+        this.vendedorResource.darComision(venta);
         return ResponseEntity
             .created(new URI("/api/ventas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
