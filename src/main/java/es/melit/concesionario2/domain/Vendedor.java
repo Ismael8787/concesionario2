@@ -49,9 +49,6 @@ public class Vendedor implements Serializable {
     @Column(name = "dni", length = 9, nullable = false)
     private String dni;
 
-    @Column(name = "comision")
-    private double comision = 0.10;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
