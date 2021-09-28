@@ -104,13 +104,12 @@ public class VentaResource {
         if (!Objects.equals(id, venta.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
+        this.cocheResource.actualizarValorDespues(id);
         if (!ventaRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        this.cocheResource.actualizarValorAntes(venta);
         Venta result = ventaRepository.save(venta);
-        this.cocheResource.actualizarValorAntes(id, venta);
 
         return ResponseEntity
             .ok()

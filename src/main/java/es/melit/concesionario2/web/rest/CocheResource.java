@@ -245,48 +245,31 @@ public class CocheResource {
     //        }
     //    }
 
-    public void actualizarValorAntes(Long id, Venta venta) {
-        Optional<Venta> v = this.ventaRepository.findById(id);
+    public void actualizarValorAntes(Venta venta) {
+        Comprador comprador = venta.getComprador();
+        Optional<Coche> c = this.cocheRepository.findById(venta.getCocheId());
 
-        Venta v2 = v.get();
-        Comprador comprador = v2.getComprador();
-
-        if (v2.getCocheId() != venta.getCocheId()) {
-            Optional<Coche> c = this.cocheRepository.findById(v2.getCocheId());
-            Coche coche = c.get();
-            coche.setVendido(false);
-            coche.setVenta(null);
-            comprador.setCocheComprado(null);
-            this.compradorRepository.save(comprador);
-            this.cocheRepository.save(coche);
-        } else {
-            Optional<Coche> c = this.cocheRepository.findById(v2.getCocheId());
-            Coche coche = c.get();
-            coche.setVendido(true);
-            coche.setVenta(venta);
-
-            comprador.setCocheComprado(coche.getId());
-            //venta.setComprador(comprador);
-            this.compradorRepository.save(comprador);
-            this.cocheRepository.save(coche);
-        }
+        Coche coche2 = c.get();
+        coche2.setVendido(true);
+        coche2.setVenta(venta);
+        comprador.setCocheComprado(coche2.getId());
+        this.compradorRepository.save(comprador);
+        this.cocheRepository.save(coche2);
     }
 
-    // public void actualizarValorDespues(Optional<Coche> coche, Venta venta){
+    public void actualizarValorDespues(Long id) {
+        Optional<Venta> v = this.ventaRepository.findById(id);
+        Venta venta = v.get();
+        Comprador comprador = venta.getComprador();
+        Optional<Coche> c = this.cocheRepository.findById(venta.getCocheId());
+        Coche coche = c.get();
+        coche.setVendido(false);
+        coche.setVenta(null);
 
-    //  Comprador comprador=venta.getComprador();
-
-    //     if (!coche.isPresent()) {} else {
-    //         Coche c = coche.get();
-    //          c.setVendido(true);
-    //          c.setVenta(venta);
-
-    //          comprador.setCocheComprado(c.getId());
-    //         //venta.setComprador(comprador);
-    //         this.compradorRepository.save(comprador);
-    //         this.cocheRepository.save(c);
-    //     }
-    // }
+        comprador.setCocheComprado(null);
+        this.compradorRepository.save(comprador);
+        this.cocheRepository.save(coche);
+    }
 
     public void eliminarValor(Long id) {
         Optional<Venta> v = this.ventaRepository.findById(id);
