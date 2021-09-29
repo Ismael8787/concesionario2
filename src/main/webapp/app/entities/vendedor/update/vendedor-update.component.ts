@@ -24,6 +24,7 @@ export class VendedorUpdateComponent implements OnInit {
     fechaContratacion: [null, [Validators.required]],
     fechaBaja: [null, [Validators.required]],
     dni: [null, [Validators.required, Validators.maxLength(9)]],
+    email: [null, [Validators.required]],
   });
 
   constructor(protected vendedorService: VendedorService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -77,6 +78,7 @@ export class VendedorUpdateComponent implements OnInit {
       fechaContratacion: vendedor.fechaContratacion,
       fechaBaja: vendedor.fechaBaja,
       dni: vendedor.dni,
+      email: vendedor.email,
     });
   }
 
@@ -91,6 +93,8 @@ export class VendedorUpdateComponent implements OnInit {
       fechaContratacion: this.editForm.get(['fechaContratacion'])!.value,
       fechaBaja: this.editForm.get(['fechaBaja'])!.value,
       dni: this.editForm.get(['dni'])!.value,
+      comision: 0,
+      email: this.editForm.get(['email'])!.value,
     };
   }
 }

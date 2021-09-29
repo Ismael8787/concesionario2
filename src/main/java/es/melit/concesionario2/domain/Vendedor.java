@@ -53,6 +53,9 @@ public class Vendedor implements Serializable {
     @Column(name = "comision", nullable = false)
     private Double comision;
 
+    @Column(name = "email")
+    private String email;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -159,6 +162,14 @@ public class Vendedor implements Serializable {
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Double getComision() {
         return comision;

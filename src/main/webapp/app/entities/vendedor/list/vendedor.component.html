@@ -57,6 +57,9 @@
           <th scope="col" jhiSortBy="comision">
             <span jhiTranslate="concesionario2App.vendedor.comision">Comision</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="concesionario2App.vendedor.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -73,6 +76,7 @@
           <td>{{ vendedor.fechaBaja | formatMediumDate }}</td>
           <td>{{ vendedor.dni }}</td>
           <td>{{ vendedor.comision }}</td>
+          <td>{{ vendedor.email }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

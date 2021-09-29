@@ -25,7 +25,8 @@
       "fechaContratacion": "Fecha Contratacion",
       "fechaBaja": "Fecha Baja",
       "dni": "Dni",
-      "comision": "comision"
+      "comision": "comision",
+      "email": "email"
     }
   }
 }
