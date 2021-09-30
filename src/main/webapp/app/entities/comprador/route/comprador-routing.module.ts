@@ -6,6 +6,7 @@ import { CompradorComponent } from '../list/comprador.component';
 import { CompradorDetailComponent } from '../detail/comprador-detail.component';
 import { CompradorUpdateComponent } from '../update/comprador-update.component';
 import { CompradorRoutingResolveService } from './comprador-routing-resolve.service';
+import { Authority } from 'app/config/authority.constants';
 
 const compradorRoute: Routes = [
   {
@@ -13,6 +14,7 @@ const compradorRoute: Routes = [
     component: CompradorComponent,
     data: {
       defaultSort: 'id,asc',
+      authorities: [Authority.ADMIN, Authority.VENDEDOR],
     },
     canActivate: [UserRouteAccessService],
   },
@@ -22,6 +24,9 @@ const compradorRoute: Routes = [
     resolve: {
       comprador: CompradorRoutingResolveService,
     },
+    data: {
+      authorities: [Authority.ADMIN, Authority.VENDEDOR],
+    },
     canActivate: [UserRouteAccessService],
   },
   {
@@ -30,6 +35,9 @@ const compradorRoute: Routes = [
     resolve: {
       comprador: CompradorRoutingResolveService,
     },
+    data: {
+      authorities: [Authority.ADMIN, Authority.VENDEDOR],
+    },
     canActivate: [UserRouteAccessService],
   },
   {
@@ -37,6 +45,9 @@ const compradorRoute: Routes = [
     component: CompradorUpdateComponent,
     resolve: {
       comprador: CompradorRoutingResolveService,
+    },
+    data: {
+      authorities: [Authority.ADMIN, Authority.VENDEDOR],
     },
     canActivate: [UserRouteAccessService],
   },
