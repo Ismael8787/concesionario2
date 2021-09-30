@@ -53,8 +53,13 @@ public class Vendedor implements Serializable {
     @Column(name = "comision", nullable = false)
     private Double comision;
 
-    @Column(name = "email")
+    @Email
+    @Size(min = 5, max = 254)
+    @Column(length = 254, unique = true)
     private String email;
+
+    // @OneToOne(mappedBy = "email",orphanRemoval = true)
+    // private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
